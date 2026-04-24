@@ -21,7 +21,7 @@ export function WatchlistProvider({ children }) {
     setLoading(true);
     try {
       const data = await getWatchlist();
-      setWatchlistItems(data.watchlist_items || []);
+      setWatchlistItems(data.watchlist || data.watchlist_items || []);
     } catch (_err) {
       setWatchlistItems([]);
     } finally {
