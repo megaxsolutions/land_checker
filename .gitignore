@@ -1,0 +1,29 @@
+# Dependencies
+frontend/node_modules/
+backend/vendor/bundle/
+
+# Build artifacts
+frontend/build/
+
+# Environment files
+backend/.env
+frontend/.env
+*.env.local
+
+# Rails
+backend/log/
+backend/tmp/
+backend/storage/
+
+# Database
+backend/*.db
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
