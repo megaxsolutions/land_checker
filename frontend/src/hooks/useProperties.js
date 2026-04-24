@@ -90,20 +90,12 @@ export function useProperties() {
     [hasMore, loading, loadMore]
   );
 
-  /* Update observer when hasMore / loading change */
+  /* Update observer when hasMore / loading change by refreshing the ref callback */
   useEffect(() => {
-    if (!sentinelRef.current || !observerRef.current) return;
-    observerRef.current.disconnect();
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          loadMore();
-        }
-      },
-      { rootMargin: '200px' }
-    );
-    observerRef.current.observe(sentinelRef.current);
-  }, [hasMore, loading, loadMore]);
+    if (!sentinelRef.current) return;
+    // Re-invoke the callback to update the observer closure
+    setSentinelRef(sentinelRef.current);
+  }, [hasMore, loading, setSentinelRef]);
 
   const updateFilters = useCallback((newFilters) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));
